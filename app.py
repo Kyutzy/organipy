@@ -87,13 +87,26 @@ def organizarPlaylistFiltrado():
     tracks = [track['track'] for track in tracks]
     chaveCorrespondente = correspondencia[tipoFiltro]
     organizado = {}
-    for track in tracks:
-        if chaveCorrespondente in track:
-            if track[chaveCorrespondente] not in organizado:
-                organizado[track[chaveCorrespondente]] = []
-            organizado[track[0][chaveCorrespondente]].append(track)
-
-    return tracks
+    if chaveCorrespondente == 'genre':
+        for track in tracks:
+            dadosArtista = requests.get(f"https://api.spotify.com/v1/artists/{track['artists'][0]['id']}", headers=getHeader())
+            try:
+                generos = (track['name'], track['id'], track['album']['images'][0]['url'], dadosArtista.json()['genres'][0])
+            except:
+                generos = (track['name'], track['id'], track['album']['images'][0]['url'], 'Genero não encontrado')
+            if generos[1] not in organizado:
+                organizado[generos[1]] = []
+            organizado[generos[1]].append(generos[0])
+        return organizado
+    else:
+        for track in tracks:
+            if chaveCorrespondente in track:
+                chaveFinal = track[chaveCorrespondente]['name'] if chaveCorrespondente != 'artists' else track[chaveCorrespondente][0]['name']
+                if chaveFinal not in organizado:
+                    organizado[chaveFinal] = []
+                organizado[chaveFinal].append((track['name'], track['id'], track['album']['images'][0]['url']))
+        print(organizado)
+        return flask.render_template('previa.html', dados=organizado)
 
 @isAuthenticated
 def getHeader():
