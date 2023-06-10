@@ -1,33 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <img src="{{dados.0.images.0.url}}">
-    <h1>{{dados.0.display_name}}</h1>
-    <br>
-    <form>
-    <table>
-        <th>
-            <td>Nome</td>
-        </th>
-        {% for playlist in dados.1 %}
-        <tr>
-            <td>{{playlist.name}}</td>
-            {% if playlist.images|length != 0%}
-            <td><img src='{{playlist.images.0.url}}' width="50px" height="50px"/></td>
-            {% else %}
-            <td><img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png' width="50px" height="50px"/></td>
-            {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-        <a href="/organizar">organizar alguma playlists</a>
-    </table>
-    </form>
-</body>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../static/css/homepage.css" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="../static/img/Organify-_1_.ico">
+    </head>
+
+    <body >
+
+        <div class="mainBox">
+
+            <div class="caixa">
+
+                <div class="sidebar">
+
+                    <div class="logo">
+                        <img src="../static/img/logo.png" alt="">
+                    </div>
+                    
+                    <nav class="navegacao">
+                        <a href="" class="">teste</a>
+                        <a href="" class="">teste</a>
+                        <a href="" class="">teste</a>
+                        <a href="" class="">teste</a>
+                    </nav>
+
+                </div>
+        
+                <div class="main">
+        
+                    <div class="header">
+        
+                        <div class="profilePic">
+                            <img src="{{dados.0.images.0.url}}" alt="img user">
+                        </div>
+        
+                        <div class="profileName">
+                            <h1>{{dados.0.display_name}}</h1>
+                        </div>
+        
+                    </div>
+        
+                    <div class="content">
+        
+                        <div class="title">
+                            Minhas playlists
+                        </div>
+
+                        <div class="playlists">
+                            {% for playlist in dados.1 %}
+                            <div class="playlist">
+
+                                <div class="playlistName">
+
+                                    <h1> {{playlist.name}} </h1>
+
+                                </div>
+
+                                <div class="playlistIMG">
+                                    {% if playlist.images|length != 0%}
+                                    <img src='{{playlist.images.0.url}}'/>
+                                    {% else %}
+                                    <img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png'/>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}                    
+                        </div>
+                    </div>
+        
+                </div>
+                
+            </div>
+
+        </div>
+
+
+
+
+    <!--
+
+        <img src="{{dados.0.images.0.url}}">
+        <h1>{{dados.0.display_name}}</h1>
+        <br>
+        <form>
+        <table>
+            <th>
+                <td>Nome</td>
+            </th>
+            {% for playlist in dados.1 %}
+            <tr>
+                <td>{{playlist.name}}</td>
+                {% if playlist.images|length != 0%}
+                <td><img src='{{playlist.images.0.url}}' width="50px" height="50px"/></td>
+                {% else %}
+                <td><img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png' width="50px" height="50px"/></td>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <a href="/organizar">organizar alguma playlists</a>
+        </table>
+        </form>
+
+    -->
+    </body>
 </html>
