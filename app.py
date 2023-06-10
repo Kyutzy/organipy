@@ -94,9 +94,9 @@ def organizarPlaylistFiltrado():
                 generos = (track['name'], track['id'], track['album']['images'][0]['url'], dadosArtista.json()['genres'][0])
             except:
                 generos = (track['name'], track['id'], track['album']['images'][0]['url'], 'Genero não encontrado')
-            if generos[1] not in organizado:
-                organizado[generos[1]] = []
-            organizado[generos[1]].append(generos[0])
+            if generos[-1] not in organizado:
+                organizado[generos[-1]] = []
+            organizado[generos[-1]].append(generos)
         return organizado
     else:
         for track in tracks:
@@ -106,7 +106,7 @@ def organizarPlaylistFiltrado():
                     organizado[chaveFinal] = []
                 organizado[chaveFinal].append((track['name'], track['id'], track['album']['images'][0]['url']))
         print(organizado)
-        return flask.render_template('previa.html', dados=organizado)
+        return organizado
 
 @isAuthenticated
 def getHeader():
