@@ -101,7 +101,7 @@ def authorize():
 def home():
     dados_usuario = requests.get('https://api.spotify.com/v1/me', headers=getHeader())
     dados_playlists = requests.get('https://api.spotify.com/v1/me/playlists', headers=getHeader())
-    return flask.render_template('home.html', dados=[flask.session['foto'], dados_usuario.json(),dados_playlists.json()['items']], foto=url_for('static', filename=f"uploads/{flask.session['foto']}.jpg"))
+    return flask.render_template('home.html', dados=[flask.session['foto'], dados_usuario.json(),dados_playlists.json()['items']])
 
 @app.route('/organizar')
 @isAuthenticated
@@ -218,19 +218,9 @@ def fazerAleatorizacao():
     requests.post(f"https://api.spotify.com/v1/playlists/{id}/tracks", headers=getHeader(), json={'uris' : uri})
     return flask.redirect('/home')
 
-@app.route('/top10')
-@isAuthenticated
-def top10():
-    pass
-
-
-
-
 @isAuthenticated
 def getHeader():
     return {'Authorization': 'Bearer ' + flask.session['token']}
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
