@@ -1,37 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Organize sua playlist</title>
+
+    <link rel="icon" type="image/x-icon" href="../static/img/Organify-_1_.ico">
+
+    <link rel="stylesheet" href="../static/css/organizar.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+
 </head>
 <body>
-    <h1>
-        Músicas na playlist:
-    </h1>
-    <form action="/organizar/playlist">
-    <fieldset>
-    <table>
-            <td>Nome</td>
-            <td>Artista</td>
-            <td>Album</td>
-            <td>Capa</td>
-{% for playlist in dados %}
-        <tr>
-        <td><input type="radio" name="playlistLink" value="{{playlist.href}}"></td>
-            <td>{{playlist.name}}</td>
-            {% if playlist.images|length != 0%}
-            <td><img src='{{playlist.images.0.url}}' width="50px" height="50px"/></td>
-            {% else %}
-            <td><img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png' width="50px" height="50px"/></td>
-            {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-        </fieldset>
-        <input type="submit" value="Selecionar">
-        </form>
-    </table>
+
+
+    <body >
+
+        <div class="mainBox">
+
+            <div class="caixa">
+
+                <div class="sidebar">
+
+                    <div class="logo">
+                        <img src="../static/img/logo.png" alt="">
+                    </div>
+                    
+                    <nav class="navegacao">
+                        <a href="/home" class="">Inicio</a>
+                        <a href="/randomizar" class="">Randomizar</a>
+                        <a href="" class="">Stats</a>
+                        <a href="/" class="">logout</a>
+                    </nav>
+
+                </div>
+        
+                <div class="main">
+        
+                    <div class="title">
+                        <h1> Selecione a playlist que deseje organizar: </h1>
+                    </div>
+
+                    <div class="content">
+                        <form action="/organizar/playlist">
+                            
+                            <div class="header">
+                                <h1 class="categoria">Escolha</h1>
+                                <h1 class="categoria">Nome Playlist</h1>
+                                <h1 class="categoria">Capa</h1>
+                            </div>
+
+                            <div class="playlists">
+                                {% for playlist in dados %}
+                                <div class="playlist">
+                                    <div class="playlistChoice">
+                                        <input type="radio" name="playlistLink" value="{{playlist.href}}">
+                                    </div>
+
+                                    <div class="playlistName">
+                                        <h1>{{playlist.name}}</h1>
+                                    </div>
+
+                                    <div class="playlistIMG">
+                                        {% if playlist.images|length != 0%}
+                                        <img src='{{playlist.images.0.url}}'/>
+                                        {% else %}
+                                        <img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png'/>
+                                        {% endif %}
+                                    </div>
+
+                                    
+                                </div>
+                                {% endfor %}
+                                
+                            </div>
+                            <div class="submitButton">
+                                <input type="submit" value="Selecionar">
+                            </div>
+
+                        </form>
+
+                    </div>
+        
+                </div>
+                
+            </div>
+
+        </div>
+
 </body>
 </html>
