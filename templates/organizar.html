@@ -5,26 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+    <style>
+        /* HIDE RADIO */
+        [type=radio] { 
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        transition: all 250ms;
+        }
+
+        /* IMAGE STYLES */
+        [type=radio] + img {
+        cursor: pointer;
+        transition: all 250ms;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            border-radius: 50%;
+            border: 2px solid #f00;
+        }
+    </style></head>
 <body>
     <h1>
-        Músicas na playlist:
+        Clique na capa da playlist desejada
     </h1>
     <form action="/organizar/playlist">
     <fieldset>
     <table>
-            <td>Nome</td>
-            <td>Artista</td>
-            <td>Album</td>
-            <td>Capa</td>
 {% for playlist in dados %}
         <tr>
-        <td><input type="radio" name="playlistLink" value="{{playlist.href}}"></td>
             <td>{{playlist.name}}</td>
             {% if playlist.images|length != 0%}
-            <td><img src='{{playlist.images.0.url}}' width="50px" height="50px"/></td>
+
+            <td>
+            <label>
+                <input type="radio" name="playlistLink" value="{{playlist.href}}">
+                <img src="{{playlist.images.0.url}}" width="50px" height="50px">
+            </label>
+        </td>
             {% else %}
-            <td><img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png' width="50px" height="50px"/></td>
+            <td><label>
+                <input type="radio" name="playlistLink" value="{{playlist.href}}">
+                <img src="https://www.freeiconspng.com/uploads/no-image-icon-4.png" width="50px" height="50px">
+            </label></td>
             {% endif %}
             </td>
         </tr>

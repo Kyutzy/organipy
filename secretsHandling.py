@@ -25,5 +25,3 @@ def K():
 def F(cred):
  with i('pain.json','r')as arquivo:
   return D(a(arquivo)[cred])
-if __name__=='__main__':
- G(F('client_id'))
