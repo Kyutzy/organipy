@@ -7,17 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="{{dados.1.images.0.url}}">
-    <img src="{{foto}}">
-    <h1>{{dados.1.display_name}}</h1>
-    <br>
-    <form>
+    <h1>
+        Músicas na playlist:
+    </h1>
+    <form action="/randomizar/playlist">
+    <fieldset>
     <table>
-        <th>
             <td>Nome</td>
-        </th>
-        {% for playlist in dados.2 %}
+            <td>Artista</td>
+            <td>Album</td>
+            <td>Capa</td>
+{% for playlist in dados %}
         <tr>
+        <td><input type="radio" name="playlistLink" value="{{playlist.href}}"></td>
             <td>{{playlist.name}}</td>
             {% if playlist.images|length != 0%}
             <td><img src='{{playlist.images.0.url}}' width="50px" height="50px"/></td>
@@ -27,9 +29,9 @@
             </td>
         </tr>
         {% endfor %}
-        <a href="/organizar">organizar alguma playlist</a>
-        <a href="/aleatorizar">aleatorizar alguma playlist</a>
+        </fieldset>
     </table>
+    <input type="submit" value="Selecionar">
     </form>
 </body>
 </html>
