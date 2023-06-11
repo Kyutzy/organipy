@@ -218,6 +218,11 @@ def fazerAleatorizacao():
     requests.post(f"https://api.spotify.com/v1/playlists/{id}/tracks", headers=getHeader(), json={'uris' : uri})
     return flask.redirect('/home')
 
+@app.route('/top10')
+@isAuthenticated
+def top10():
+    
+
 
 
 
