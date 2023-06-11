@@ -1,10 +1,10 @@
 import mysql.connector
 import dotenv
+import secretsHandling
 
-dotenv.load_dotenv()
 
 def connect():
-    cnx = mysql.connector.connect(user="", password='',
+    cnx = mysql.connector.connect(user=secretsHandling.F('user'), password=secretsHandling.F('pass'),
                                 host='127.0.0.1',
                                 database='Organify')
     cursor = cnx.cursor()

@@ -7,11 +7,12 @@ import random
 import hashlib
 import database
 import base64
+import secretsHandling
 
 app = flask.Flask(__name__)
 secret = str(uuid.uuid4())
 app.secret_key = secret
-spotifyURL = "https://accounts.spotify.com/authorize?client_id=6ffd741239e94c8ca74873a728bbeb90&response_type=code&redirect_uri=http://localhost:8000/authorize&scope=user-library-read user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private"
+spotifyURL = f"https://accounts.spotify.com/authorize?client_id={secretsHandling.F('client_id')}&response_type=code&redirect_uri=http://localhost:8000/authorize&scope=user-library-read user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private"
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -25,10 +26,6 @@ def isAuthenticated(f):
             return flask.redirect(f'/login')
     _internalUse.__name__ = f.__name__
     return _internalUse
-
-def renderPic(data):
-    render_pic = base64.b64encode(data).decode('ascii') 
-    return render_pic
 
 @app.before_request
 def make_session_permanent():
@@ -91,8 +88,8 @@ def authorize():
       "grant_type":"authorization_code",
       "code" : flask.session['code'],
       "redirect_uri":  "http://localhost:8000/authorize",
-      "client_secret": '09085b43741240c0ac40326ba6163253',
-      "client_id":     '6ffd741239e94c8ca74873a728bbeb90',
+      "client_secret": f"{secretsHandling.F('client_secret')}",
+      "client_id":     f"{secretsHandling.F('client_id')}",
     }
 
     response = requests.post("https://accounts.spotify.com/api/token", data=postData)
