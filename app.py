@@ -221,7 +221,7 @@ def fazerAleatorizacao():
 @app.route('/top10')
 @isAuthenticated
 def top10():
-    
+    pass
 
 
 
