@@ -7,16 +7,17 @@ import random
 import hashlib
 import database
 import base64
-import secretsHandling
+import X
 
 app = flask.Flask(__name__)
 secret = str(uuid.uuid4())
 app.secret_key = secret
-spotifyURL = f"https://accounts.spotify.com/authorize?client_id={secretsHandling.F('client_id')}&response_type=code&redirect_uri=http://localhost:8000/authorize&scope=user-library-read user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private"
+spotifyURL = f"https://accounts.spotify.com/authorize?client_id={X.F('client_id')}&response_type=code&redirect_uri=http://localhost:8000/authorize&scope=user-library-read user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private"
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def isAuthenticated(f):
+    """Decorator to check if user is authenticated"""
     def _internalUse(*args, **kwargs):
         if 'token' in flask.session:
             return f(*args, **kwargs)
@@ -70,6 +71,7 @@ def handleLogin():
         flask.session['autenticado'] = True
         flask.session['nome'] = data[1]
         flask.session['foto'] = data[2]
+        print('autenticado')
         return flask.redirect('/auth')
     else:
         return flask.redirect('/login')
@@ -88,8 +90,8 @@ def authorize():
       "grant_type":"authorization_code",
       "code" : flask.session['code'],
       "redirect_uri":  "http://localhost:8000/authorize",
-      "client_secret": f"{secretsHandling.F('client_secret')}",
-      "client_id":     f"{secretsHandling.F('client_id')}",
+      "client_secret": f"{X.F('client_secret')}",
+      "client_id":     f"{X.F('client_id')}",
     }
 
     response = requests.post("https://accounts.spotify.com/api/token", data=postData)
@@ -114,7 +116,8 @@ def organizar():
 def organizarPlaylist():
     urlPlaylistEscolhida = flask.request.args.get('playlistLink')
     flask.session['urlPlaylistEscolhida'] = urlPlaylistEscolhida
-    return flask.render_template('telaOrganizacao.html')
+    request = requests.get(urlPlaylistEscolhida, headers=getHeader())
+    return flask.render_template('telaOrganizacao.html', imagem = request.json()['images'][0]['url'])
 
 @app.route('/organizar/playlist/filtrado')
 @isAuthenticated
