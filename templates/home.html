@@ -57,15 +57,10 @@
                                 
                                 <div class="playlistName">
 
-                                    <h1> {{playlist.name}} </h1>
+                                    <a target="_blank" href="https://open.spotify.com/playlist/{{playlist.id}}"> {{playlist.name}} </a>
 
                                 </div>
-                                
-                                <div class="iconSpotify">
-                                    <a href="https://open.spotify.com/playlist/{{playlist.id}}">
-                                        <img src='../static/img/spotify.png'/>
-                                    </a>
-                                </div>
+                            
 
                                 <div class="playlistIMG">
                                     {% if playlist.images|length != 0%}

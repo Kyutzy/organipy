@@ -98,7 +98,7 @@
     border-radius: 0.5rem;
 
     display: grid;
-    grid-template-columns: 60% 20% 20%;
+    grid-template-columns: 80% 20%;
     transition: ease-in-out;
 }
 
@@ -106,28 +106,6 @@
     scale: 1.05;
 }
 
-.iconSpotify{
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-}
-
-.iconSpotify img{
-    width: 2rem;
-    height: 2rem;
-
-    border-radius: 50%;
-    transition: 0.5s ease-out;
-}
-
-.iconSpotify img:hover{
-    width: 2.5rem;
-    height: 2.5rem;
-
-    border-radius: 50%;
-}
 
 .playlistName{
 
@@ -135,8 +113,16 @@
     align-items: center;
     padding-left: 0.5rem;
 }
-.playlistName h1{
+.playlistName a{
     font-size: 1.25rem;
+    text-decoration: none;
+    color: var(--white);
+
+    transition: 0.5 ease-in;
+}
+.playlist a:hover{
+    font: 1.5rem;
+    color: var(--purple-light);
 }
 
 .playlistIMG{

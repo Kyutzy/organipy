@@ -1,0 +1,108 @@
+:root{
+
+    --purple-light: #A306CF;
+    --purple: #861878;
+    --purple-hover: #62087C;
+
+    --purple-black-gradient: linear-gradient(180deg, rgba(134,24,120,1) 0%, rgba(0,0,0,1) 100%);
+
+    --black: #000000;
+    --light-gray: #989898;
+    --white: #ffffff;
+
+    --font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+.mainBox{
+    display: flex;
+    flex: 1 1 0%;
+    height: 100vh;
+    overflow: hidden;
+
+    background: var(--purple);
+    background: var(--purple-black-gradient);
+}
+
+.content{
+    margin: auto;
+}
+
+.logo{
+    display: flex;
+    width: 100%;
+    height: 169px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+}
+
+.form{
+    color: var(--white);
+}
+.username {
+    display: flex;
+    flex-direction: column;
+}
+.username input{
+    width: 100%;
+    position: relative;
+    background-color: #f7f7f7;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+
+    height: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.password{
+    display: flex;
+    flex-direction: column;
+}
+
+.password input{
+    width: 100%;
+    position: relative;
+    background-color: #f7f7f7;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+
+    height: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.label{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.submitButton{
+    width: 100%;
+}
+
+.submitButton input{
+
+    margin-top: 5px;
+
+    width: 100%;
+    padding: 5px;
+    border-radius: 1rem;
+    background-color: var(--purple);
+    border: none;
+    color: var(--white);
+    font-family: var(--font-family);
+
+    transition: 0.5s ease-in;
+}
+
+.submitButton input:hover{
+    background-color: var(--purple-hover);
+    cursor: pointer;
+}
+
+.imagemCapa{
+    display: flex;
+    flex-direction: column;
+}
