@@ -12,11 +12,10 @@ def D(Z=T):
  y=Fernet(N)
  return y.decrypt(Z).decode('utf8')
 def K():
- with i(J(b'Li9jaGF2ZS5rZXk='),'rb')as B:
+ with i(J(b'Li9jaGF2ZS5rZXk='),'r')as B:
   l=B.read()
-  l=l.decode('utf8')
-  return l.split('|')[1]
+  l=l.split('|')[1]
+  return l
 def F(P):
  with i(J(b'cGFpbi5qc29u'),'r')as B:
   return D(a(B)[P])
-
