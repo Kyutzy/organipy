@@ -1,35 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <img src="{{dados.1.images.0.url}}">
-    <img src="{{foto}}">
-    <h1>{{dados.1.display_name}}</h1>
-    <br>
-    <form>
-    <table>
-        <th>
-            <td>Nome</td>
-        </th>
-        {% for playlist in dados.2 %}
-        <tr>
-            <td>{{playlist.name}}</td>
-            {% if playlist.images|length != 0%}
-            <td><img src='{{playlist.images.0.url}}' width="50px" height="50px"/></td>
-            {% else %}
-            <td><img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png' width="50px" height="50px"/></td>
-            {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-        <a href="/organizar">organizar alguma playlist</a>
-        <a href="/aleatorizar">aleatorizar alguma playlist</a>
-    </table>
-    </form>
-</body>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="../static/css/homepage.css" rel="stylesheet">
+        <link rel="stylesheet" href="../static/css/main.css">
+
+        <link rel="icon" type="image/x-icon" href="../static/img/Organify-_1_.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script defer>
+
+            function aparece(){
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('sidebar-show')
+            }
+    
+        </script>
+    
+    </head>
+    <body>
+    
+        <body >
+    
+            <div class="mainBox">
+    
+                <div class="caixa">
+    
+                    <div class="toggle-sidebar">
+                        <button onclick="aparece()"><i class="fas fa-bars"></i></button>
+                    </div>
+                    <div class="sidebar" id="sidebar">
+
+                    <div class="logo">
+                        <img src="../static/img/logo.png" alt="">
+                    </div>
+                    
+                    <nav class="navegacao">
+                        <a href="/organizar" class="">Organize sua playlist</a>
+                        <a href="/randomizar" class="">Randomizar</a>
+                        <a href="" class="">Stats</a>
+                        <a href="/" class="">logout</a>
+                    </nav>
+
+                </div>
+        
+                <div class="main">
+        
+                    <div class="header">
+
+                        <div class="profilePic">
+                            <img src="{{dados.0.images.0.url}}" alt="img user">
+                        </div>
+        
+                        <div class="profileName">
+                            <h1>{{dados.0.display_name}}</h1>
+                        </div>
+
+                    </div>
+        
+                    <div class="content">
+        
+                        <div class="title">
+                            Minhas playlists
+                        </div>
+
+                        <div class="playlists">
+                            {% for playlist in dados.1 %}
+                            <div class="playlist">
+                                
+                                <div class="playlistName">
+
+                                    <a target="_blank" href="https://open.spotify.com/playlist/{{playlist.id}}"> {{playlist.name}} </a>
+
+                                </div>
+                            
+
+                                <div class="playlistIMG">
+                                    {% if playlist.images|length != 0%}
+                                    <img src='{{playlist.images.0.url}}'/>
+                                    {% else %}
+                                    <img src='https://www.freeiconspng.com/uploads/no-image-icon-4.png'/>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}                    
+                        </div>
+                    </div>
+        
+                </div>
+                
+            </div>
+
+        </div>
+
+    </body>
 </html>

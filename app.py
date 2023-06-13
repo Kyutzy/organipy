@@ -5,7 +5,7 @@ import requests
 from datetime import timedelta
 import random
 import hashlib
-import database
+# import database
 import base64
 import X
 
@@ -103,7 +103,9 @@ def authorize():
 def home():
     dados_usuario = requests.get('https://api.spotify.com/v1/me', headers=getHeader())
     dados_playlists = requests.get('https://api.spotify.com/v1/me/playlists', headers=getHeader())
-    return flask.render_template('home.html', dados=[flask.session['foto'], dados_usuario.json(),dados_playlists.json()['items']])
+
+    return flask.render_template('home.html', dados=[ dados_usuario.json(),dados_playlists.json()['items']])
+
 
 @app.route('/organizar')
 @isAuthenticated
@@ -117,7 +119,9 @@ def organizarPlaylist():
     urlPlaylistEscolhida = flask.request.args.get('playlistLink')
     flask.session['urlPlaylistEscolhida'] = urlPlaylistEscolhida
     request = requests.get(urlPlaylistEscolhida, headers=getHeader())
-    return flask.render_template('telaOrganizacao.html', imagem = request.json()['images'][0]['url'])
+
+    return flask.render_template('telaOrganizacao.html', imagem = request.json()['images'][0]['url'], nome = request.json()['name'])
+
 
 @app.route('/organizar/playlist/filtrado')
 @isAuthenticated

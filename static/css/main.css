@@ -1,0 +1,190 @@
+:root{
+
+    --purple-light: #A306CF;
+    --purple: #861878;
+    --purple-hover: #62087C;
+
+    --purple-black-gradient: linear-gradient(180deg, rgba(134,24,120,1) 0%, rgba(0,0,0,1) 100%);
+
+    --black: #000000;
+    --black-transparent: rgb(0, 0, 0, 75%);
+    --light-gray: #989898;
+    --white: #ffffff;
+
+    --font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+
+
+html{
+    line-height: 1.5;
+    font-family: var(--font-family);
+
+    -webkit-text-size-adjust: 100%;
+}
+
+body{
+    margin: 0;
+    line-height: inherit;
+}
+
+/*
+    GENERAL
+*/
+
+.mainBox{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.caixa{
+    display: flex;
+    flex: 1 1 0%;
+}
+
+/*
+    SIDEBAR
+*/
+
+.sidebar {
+    width: 12rem;
+    padding: 1.5rem;
+    background-color: var(--black);
+    color: var(--white);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.logo {
+    width: 10rem;
+    height: 13rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 10rem;
+    height: 10rem;
+}
+
+.navegacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 3px;
+}
+
+.navegacao a {
+    text-decoration: none;
+    color: var(--light-gray);
+}
+
+.navegacao a:hover {
+    font-size: large;
+    color: var(--white);
+}
+
+.toggle-sidebar {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9999;
+    cursor: pointer;
+    color: var(--white);
+}
+.toggle-sidebar button{
+    background: none;
+    border: none;
+}
+  
+.fa-bars {
+ font-size: 1.5rem;
+ color: var(--white);
+}
+
+.main{
+    flex-direction: column;
+    flex: 1 1 0%;
+    align-items: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 1rem
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888888d3;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555555b9;
+  }
+
+
+/* Estilos para tornar a barra lateral responsiva */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .sidebar-show {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--black);
+        color: var(--white);
+        padding: 2rem;
+        z-index: 9999;
+        overflow-y: scroll;
+
+        margin: 0;
+    }
+
+    .sidebar-show .navegacao {
+        margin-top: 2rem;
+        gap: 10px;
+    }
+
+    .sidebar-show .navegacao a:hover {
+        font-size: initial;
+        color: var(--light-gray);
+    }
+
+    .toggle-sidebar {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 99999;
+        cursor: pointer;
+        color: var(--white);
+    }
+    .active {
+        display: block;
+    }
+}
+
+  

@@ -4,16 +4,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Escolha o filtro</title>
+
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/telaOrganizacao.css">
+
+    <link rel="icon" type="image/x-icon" href="../static/img/Organify-_1_.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">   
+
+    <script defer>
+
+        function aparece(){
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-show')
+        }
+
+    </script>
+
 </head>
 <body>
-    <table>
-        <form action="/organizar/playlist/filtrado">
-        <input type="radio" name="Filtro" value="genero">Genero</input>
-        <input type="radio" name="Filtro" value="artista">Artista</input>
-        <input type="radio" name="Filtro" value="album">Album</input>
-        <br>
-        <input type="submit" name="Filtrar" value="Filtrar"></input>
-    </table>
+
+    <body >
+
+        <div class="mainBox">
+
+            <div class="caixa">
+
+                <div class="toggle-sidebar">
+                    <button onclick="aparece()"><i class="fas fa-bars"></i></button>
+                </div>
+                <div class="sidebar" id="sidebar">
+
+                <div class="logo">
+                    <img src="../static/img/logo.png" alt="">
+                </div>
+                
+                <nav class="navegacao">
+                    <a href="/home" class="">Início</a>
+                    <a href="/organizar" class="">Organize sua playlist</a>
+                    <a href="/randomizar" class="">Randomizar</a>
+                    <a href="" class="">Stats</a>
+                    <a href="/" class="">logout</a>
+                </nav>
+
+            </div>
+    
+            <div class="main">
+
+                <div class="backButton">
+                    <a href="/organizar">voltar</a>
+                </div>
+
+                <form action="/organizar/playlist/filtrado">
+
+
+                    <div class="filtros">
+                        <div><input type="radio" name="Filtro" value="genero">Genero</input></div>
+                        
+                        <div><input type="radio" name="Filtro" value="artista">Artista</input></div>
+                        <div><input type="radio" name="Filtro" value="album">Album</input></div>
+
+
+                    </div>
+
+                    <div class="playlist">
+
+                        <div class="playlistName">
+                            <h1>{{nome}}</h1>
+                        </div>
+
+                        <div class="playlistIMG">
+                            <img src="{{imagem}}" alt="">
+                        </div>
+
+                        <input type="submit" name="Filtrar" value="Filtrar"></input>
+                    </div>
+    
+                    
+                </form>
+                
+            </div>
+            
+        </div>
+
+    </div>
+
 </body>
 </html>
