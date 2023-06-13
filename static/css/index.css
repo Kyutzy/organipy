@@ -7,8 +7,11 @@
     --purple-black-gradient: linear-gradient(180deg, rgba(134,24,120,1) 0%, rgba(0,0,0,1) 100%);
 
     --black: #000000;
+    --black-transparent: rgb(0, 0, 0, 75%);
     --light-gray: #989898;
     --white: #ffffff;
+
+    --font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 }
 

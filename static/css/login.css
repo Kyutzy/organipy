@@ -7,6 +7,7 @@
     --purple-black-gradient: linear-gradient(180deg, rgba(134,24,120,1) 0%, rgba(0,0,0,1) 100%);
 
     --black: #000000;
+    --black-transparent: rgb(0, 0, 0, 75%);
     --light-gray: #989898;
     --white: #ffffff;
 
@@ -49,8 +50,8 @@
 .username input{
     width: 100%;
     position: relative;
-    background-color: #f7f7f7;
-    border: 1px solid #e6e6e6;
+    background-color: var(--white);
+    border: 1px solid var(--white);
     border-radius: 10px;
 
     height: 1.5rem;
@@ -65,8 +66,8 @@
 .password input{
     width: 100%;
     position: relative;
-    background-color: #f7f7f7;
-    border: 1px solid #e6e6e6;
+    background-color: var(--white);
+    border: 1px solid var(--white);
     border-radius: 10px;
 
     height: 1.5rem;

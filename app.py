@@ -117,7 +117,8 @@ def organizar():
 def organizarPlaylist():
     urlPlaylistEscolhida = flask.request.args.get('playlistLink')
     flask.session['urlPlaylistEscolhida'] = urlPlaylistEscolhida
-    return flask.render_template('telaOrganizacao.html')
+    request = requests.get(urlPlaylistEscolhida, headers=getHeader())
+    return flask.render_template('telaOrganizacao.html', imagem = request.json()['images'][0]['url'], nome = request.json()['name'])
 
 @app.route('/organizar/playlist/filtrado')
 @isAuthenticated

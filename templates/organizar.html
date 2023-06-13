@@ -9,10 +9,19 @@
 
     <link rel="stylesheet" href="../static/css/organizar.css">
     <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script defer>
+
+        function aparece(){
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-show')
+        }
+
+    </script>
 
 </head>
 <body>
-
 
     <body >
 
@@ -20,7 +29,10 @@
 
             <div class="caixa">
 
-                <div class="sidebar">
+                <div class="toggle-sidebar">
+                    <button onclick="aparece()"><i class="fas fa-bars"></i></button>
+                </div>
+                <div class="sidebar" id="sidebar">
 
                     <div class="logo">
                         <img src="../static/img/logo.png" alt="">
@@ -38,7 +50,7 @@
                 <div class="main">
         
                     <div class="title">
-                        <h1> Selecione a playlist que deseje organizar: </h1>
+                        <h1> Selecione a playlist que deseja organizar: </h1>
                     </div>
 
                     <div class="content">
