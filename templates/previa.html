@@ -4,11 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+    function mostrarDiv() {
+      var select = document.getElementById("selecionarDiv");
+      var divSelecionada = select.value;
+      var divs = document.getElementsByClassName("conteudo");
+      for (var i = 0; i < divs.length; i++) {
+        divs[i].style.display = "none";
+      }
+      document.getElementById(divSelecionada).style.display = "block";
+    }
+  
+  </script>
+  <style>
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .div{
+        display: flex;
+        flex-direction: row;
+    }
+  </style>
 </head>
 <body>
     <form action="/organizar/playlist/filtrado/organizado">
+    <select id="selecionarDiv" onchange="mostrarDiv()">
+        <option value="conteudo">Selecione</option>
+        {% for key, value in dados.items() %}
+        {% if key != 'nome'%}
+        <option value="{{dados.nome}} - {{key}}">{{dados.nome}} - {{key}}</option>
+        {% endif %}
+        {% endfor %}
     <input type="submit" value="sucesso">
     </form>
-        {{dados}}
+        {% for key, value in dados.items() %}
+        {% if key != 'nome'%}
+        <h1>{{dados.nome}} - {{key}}</h1>
+        <div class="conteudo" id="{{dados.nome}} - {{key}}">
+        {% for valor in value%}
+        <img src='{{valor.foto}}' width="200px" height="200px">
+        <p>{{valor.nome}}</p>
+        {% else %}
+        <p></p>
+        {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
 </body>
 </html>
