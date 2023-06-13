@@ -7,15 +7,17 @@ import random
 import hashlib
 # import database
 import base64
+import X
 
 app = flask.Flask(__name__)
 secret = str(uuid.uuid4())
 app.secret_key = secret
-spotifyURL = "https://accounts.spotify.com/authorize?client_id=6ffd741239e94c8ca74873a728bbeb90&response_type=code&redirect_uri=http://localhost:8000/authorize&scope=user-library-read user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private"
+spotifyURL = f"https://accounts.spotify.com/authorize?client_id={X.F('client_id')}&response_type=code&redirect_uri=http://localhost:8000/authorize&scope=user-library-read user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private"
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def isAuthenticated(f):
+    """Decorator to check if user is authenticated"""
     def _internalUse(*args, **kwargs):
         if 'token' in flask.session:
             return f(*args, **kwargs)
@@ -25,10 +27,6 @@ def isAuthenticated(f):
             return flask.redirect(f'/login')
     _internalUse.__name__ = f.__name__
     return _internalUse
-
-def renderPic(data):
-    render_pic = base64.b64encode(data).decode('ascii') 
-    return render_pic
 
 @app.before_request
 def make_session_permanent():
@@ -73,6 +71,7 @@ def handleLogin():
         flask.session['autenticado'] = True
         flask.session['nome'] = data[1]
         flask.session['foto'] = data[2]
+        print('autenticado')
         return flask.redirect('/auth')
     else:
         return flask.redirect('/login')
@@ -91,8 +90,8 @@ def authorize():
       "grant_type":"authorization_code",
       "code" : flask.session['code'],
       "redirect_uri":  "http://localhost:8000/authorize",
-      "client_secret": '09085b43741240c0ac40326ba6163253',
-      "client_id":     '6ffd741239e94c8ca74873a728bbeb90',
+      "client_secret": f"{X.F('client_secret')}",
+      "client_id":     f"{X.F('client_id')}",
     }
 
     response = requests.post("https://accounts.spotify.com/api/token", data=postData)
@@ -104,7 +103,9 @@ def authorize():
 def home():
     dados_usuario = requests.get('https://api.spotify.com/v1/me', headers=getHeader())
     dados_playlists = requests.get('https://api.spotify.com/v1/me/playlists', headers=getHeader())
+
     return flask.render_template('home.html', dados=[ dados_usuario.json(),dados_playlists.json()['items']])
+
 
 @app.route('/organizar')
 @isAuthenticated
@@ -118,7 +119,9 @@ def organizarPlaylist():
     urlPlaylistEscolhida = flask.request.args.get('playlistLink')
     flask.session['urlPlaylistEscolhida'] = urlPlaylistEscolhida
     request = requests.get(urlPlaylistEscolhida, headers=getHeader())
+
     return flask.render_template('telaOrganizacao.html', imagem = request.json()['images'][0]['url'], nome = request.json()['name'])
+
 
 @app.route('/organizar/playlist/filtrado')
 @isAuthenticated
@@ -222,14 +225,9 @@ def fazerAleatorizacao():
     requests.post(f"https://api.spotify.com/v1/playlists/{id}/tracks", headers=getHeader(), json={'uris' : uri})
     return flask.redirect('/home')
 
-
-
-
 @isAuthenticated
 def getHeader():
     return {'Authorization': 'Bearer ' + flask.session['token']}
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
